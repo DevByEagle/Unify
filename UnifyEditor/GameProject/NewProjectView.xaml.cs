@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +23,20 @@ namespace UnifyEditor.GameProject
     public NewProjectView()
     {
       InitializeComponent();
+    }
+
+    private void OnCreate_Button_Click(object sender, RoutedEventArgs e)
+    {
+      var vm = DataContext as NewProject;
+      var projectPath = vm.CreateProject(templatesListBox.SelectedItem as ProjectTemplate);
+      bool dialogResult = false;
+      var win = Window.GetWindow(this);
+      if (!string.IsNullOrEmpty(projectPath))
+      {
+        dialogResult = true;
+      }
+      win.DialogResult = dialogResult;
+      win.Close();
     }
   }
 }
