@@ -149,10 +149,13 @@ namespace UnifyEditor.GameProject
         var dirInfo = new DirectoryInfo(path + @".Unify\");
         dirInfo.Attributes |= FileAttributes.Hidden;
         File.Copy(template.IconFilePath, Path.GetFullPath(Path.Combine(dirInfo.FullName, "Icon.png")));
-        File.Copy(template.IconFilePath, Path.GetFullPath(Path.Combine(dirInfo.FullName, "Screenshot.png")));
+        File.Copy(template.ScreenshotFilePath, Path.GetFullPath(Path.Combine(dirInfo.FullName, "Screenshot.png")));
 
-        var project = new Project(ProjectName, path);
-        Serializer.ToFile(project, path + "ProjectName" + Project.Extonsion);
+        var projectXml = File.ReadAllText(template.ProjectFilePath);
+        projectXml = string.Format(projectXml, ProjectName, ProjectPath);
+        var projectPath = Path.GetFullPath(Path.Combine(path, $"{ProjectName}{Project.Extonsion}"));
+        File.WriteAllText(projectPath, projectXml);
+
         return path;
       }
       catch (Exception ex) 
