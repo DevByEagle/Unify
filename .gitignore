@@ -1,1 +1,13 @@
-[Bb]in/
+# CMake build directories
+build/
+
+# Object and binary files
+*.o
+*.obj
+*.so
+*.dll
+*.dylib
+*.a
+*.lib
+*.exe
+*.out
